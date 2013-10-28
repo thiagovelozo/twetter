@@ -1,0 +1,16 @@
+<li>
+  <table class="table">
+    <tbody>
+      <tr>
+        <%= content_tag :td, image_tag(gravatar(tweet.user), :class => 'img-rounded'), :style => 'width: 60px;' %>
+        <td>
+          <%= content_tag :strong, tweet.user.name, :class => 'pull-left' %>
+          <%= content_tag :small, "@"+tweet.user.username, :class => 'text-muted pad-10' %>
+          <%= content_tag :small, tweet.created_at.strftime("%b %-d"), :class => 'text-muted pull-right' %>
+          <div class="clearfix"></div>
+          <%= content_tag :p, tweet.content %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</li>

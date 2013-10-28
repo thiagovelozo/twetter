@@ -8,18 +8,8 @@
       <h4>Tweets</h4>
     </div>
     <div class="clearfix"></div>
-    <hr />
     <ol class="list-unstyled">
-      <% @tweets.each do |tweet| -%>
-      <li>
-        <%= content_tag :strong, tweet.user.name, :class => 'pull-left text-middle' %>
-        <%= content_tag :small, "@"+tweet.user.username, :class => 'text-muted pad-10 text-middle' %>
-        <%= content_tag :small, tweet.created_at.strftime("%b %-d"), :class => 'text-muted text-middle pull-right' %>
-        <div class="clearfix"></div>
-        <%= content_tag :p, tweet.content %>
-      </li>
-      <li><hr></li>
-      <% end -%>
+      <%= render :partial => 'tweet', :collection => @tweets %>
     </ol>
   </div>
 </div>
