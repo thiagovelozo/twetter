@@ -11,6 +11,16 @@ class RetweetsController < ApplicationController
     redirect_to params[:return_to] || root_path
   end
 
+  def destroy
+    rt = Retweet.where(:id => params[:id])
+    if rt.exists?
+      rt.destroy_all
+    else
+      flash[:error] = "We're sorry. We could not find that retweet."
+    end
+    redirect_to params[:return_to] || root_path
+  end
+
   private
 
   def retweet_params
