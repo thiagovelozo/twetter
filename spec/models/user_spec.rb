@@ -4,6 +4,7 @@ describe User do
   context "associations" do
     it { should have_many :follows }
     it { should have_many :tweets }
+    it { should have_many :retweets }
   end
 
   context "factories" do
@@ -43,15 +44,17 @@ describe User do
     let(:t1) { FactoryGirl.create(:tweet, :user => user)}
     let(:t2) { FactoryGirl.create(:tweet) }
     let(:t3) { FactoryGirl.create(:tweet) }
+    let(:t4) { FactoryGirl.create(:tweet) }
 
     before do
       t1
       user.follows.create(:following => t2.user)
+      t4.retweets.create(:user => user)
       t3
     end
 
-    it "should return all my tweets and followed tweets, ordered by creation time" do
-      user.all_tweets.load.map(&:id).should == [t2.id, t1.id]
+    it "should return all my tweets, retweets and followed tweets, ordered by creation time" do
+      user.all_tweets.load.map(&:id).should == [t4.id, t2.id, t1.id]
     end
   end
 end

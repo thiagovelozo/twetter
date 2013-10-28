@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :follows
+  has_many :retweets
   has_many :tweets
 
   validates :name, :presence => true

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Tweet do
   context "associations" do
     it { should belong_to :user }
+    it { should have_many :retweets }
   end
 
   context "factories" do
@@ -38,11 +39,22 @@ describe Tweet do
 
   describe ".by_user_ids" do
     let!(:t1) { FactoryGirl.create(:tweet) }
-    let!(:t2) { FactoryGirl.create(:tweet)}
+    let!(:t2) { FactoryGirl.create(:tweet) }
     let!(:t3) { FactoryGirl.create(:tweet) }
+    let!(:t4) { FactoryGirl.create(:tweet) }
+    let!(:t5) { FactoryGirl.create(:tweet) }
+    let!(:t6) { FactoryGirl.create(:tweet) }
 
     it "should search by user ids" do
-      Tweet.by_user_ids(t1.user.id, t3.user.id).load.map(&:user_id).should == [t3.user.id, t1.user.id]
+      Tweet.by_user_ids(t1.user.id, t3.user.id).load.map(&:id).should == [t3.id, t1.id]
+    end
+
+    it "should include retweets of the users" do
+      t4.retweets.create!(:user => t3.user)
+      t5.retweets.create!(:user => t4.user)
+      t6.retweets.create!(:user => t2.user)
+
+      Tweet.by_user_ids(t1.user.id, t3.user.id).load.map(&:id).should == [t4.id, t3.id, t1.id]
     end
   end
 end
