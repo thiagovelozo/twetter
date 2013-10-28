@@ -1,0 +1,33 @@
+<li>
+  <%= content_tag :strong, tweet.user.name, :class => 'pull-left text-middle' %>
+  <%= content_tag :small, "@"+tweet.user.username, :class => 'text-muted pad-10 text-middle' %>
+  <%= content_tag :small, tweet.created_at.strftime("%b %-d"), :class => 'text-muted text-middle pull-right' %>
+  <div class="clearfix"></div>
+  <%= content_tag :p, tweet.content %>
+  <div class="clearfix"></div>
+  <% if can_retweet(tweet) -%>
+  <%= content_tag :div, :class => 'pull-right' do %>
+    <%= form_for :retweet, :url => retweets_path,
+                           :method => 'POST',
+                           :role => :form do |f| %>
+      <%= hidden_field_tag :return_to, tweets_path %>
+      <%= f.hidden_field :tweet_id, :value => tweet.id.to_s %>
+      <span class="glyphicon glyphicon-retweet smaller text-primary"></span>
+      <%= f.submit "Retweet".html_safe, :class => 'btn btn-link smaller' %>
+    <% end %>
+  <% end %>
+  <div class="clearfix"></div>
+  <% elsif has_retweeted(tweet) -%>
+  <%= content_tag :div, :class => 'pull-right' do %>
+    <%= form_for :retweet, :url => retweet_path(retweet(tweet).id),
+                           :method => 'DELETE',
+                           :role => :form do |f| %>
+      <%= hidden_field_tag :return_to, tweets_path %>
+      <span class="glyphicon glyphicon-retweet smaller text-success"></span>
+      <%= f.submit 'Retweeted', :class => 'btn btn-link text-success smaller' %>
+    <% end %>
+  <% end %>
+  <div class="clearfix"></div>
+  <% end -%>
+</li>
+<li><hr></li>

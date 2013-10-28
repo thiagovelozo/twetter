@@ -149,6 +149,10 @@ nav {
   font-weight: lighter;
 }
 
+.smaller {
+  font-size: 70%;
+}
+
 .alert-float {
   position: fixed;
   top: 0;
@@ -178,4 +182,13 @@ table.stats small {
 
 table.stats td:first-child {
   padding-left: 18px;
+}
+
+.btn-link.text-success {
+  color: #468847;
+}
+
+.btn-link.smaller {
+  padding-right: 0;
+  padding-left: 0;
 }
