@@ -20,7 +20,12 @@ class TweetsController < ApplicationController
   private
 
   def get_tweets
-    @tweets = current_user.all_tweets
+    if params[:username]
+      user = User.where(:username => params[:username]).first
+      @tweets = user.tweets.order('created_at DESC') if user
+    else
+      @tweets = current_user.all_tweets
+    end
   end
 
   def tweet_params

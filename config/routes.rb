@@ -6,6 +6,7 @@ TwitterClone::Application.routes.draw do
   authenticated :user do
     resources :follows, :except => [:new, :edit, :show, :update]
     resources :tweets, :except => [:new, :edit, :show, :update]
+    get ':username', :to => 'tweets#index', :as => :profile
     root :to => 'follows#index', :as => :user_root
   end
 
