@@ -10,7 +10,7 @@
     <%= form_for :retweet, :url => retweets_path,
                            :method => 'POST',
                            :role => :form do |f| %>
-      <%= hidden_field_tag :return_to, tweets_path %>
+      <%= hidden_field_tag :return_to, request.original_url %>
       <%= f.hidden_field :tweet_id, :value => tweet.id.to_s %>
       <span class="glyphicon glyphicon-retweet smaller text-primary"></span>
       <%= f.submit "Retweet".html_safe, :class => 'btn btn-link smaller' %>
@@ -22,7 +22,7 @@
     <%= form_for :retweet, :url => retweet_path(retweet(tweet).id),
                            :method => 'DELETE',
                            :role => :form do |f| %>
-      <%= hidden_field_tag :return_to, tweets_path %>
+      <%= hidden_field_tag :return_to, request.original_url %>
       <span class="glyphicon glyphicon-retweet smaller text-success"></span>
       <%= f.submit 'Retweeted', :class => 'btn btn-link text-success smaller' %>
     <% end %>
