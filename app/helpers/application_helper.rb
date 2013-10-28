@@ -1,12 +1,19 @@
 module ApplicationHelper
-  def follow_link(user)
+  def follow_link(user, return_path = nil)
     follow = Follow.where(:user => current_user, :following => user)
     if follow.exists?
-      button_to("Unfollow", follow_path(follow.first), :method => :delete, :class => 'btn btn-danger mar-top-5', :form => { :class => 'form-inline pull-right' })
+      form_for(:follow, :url => follow_path(follow.first), :method => 'DELETE', :html => { :class => 'form-inline pull-right' }) do |f|
+        html = ''
+        html += hidden_field_tag(:return_to, return_path) if return_path
+        html += f.submit('Unfollow', :class => "btn btn-danger mar-top-5")
+        html.html_safe
+      end
     else
       form_for(:follow, :url => follows_path, :method => 'POST', :html => { :class => 'pull-right' }) do |f|
-        f.hidden_field(:following_id, :value => user.id.to_s) +
-        f.submit('Follow', :class => "btn btn-primary mar-top-5")
+        html = f.hidden_field(:following_id, :value => user.id.to_s)
+        html += hidden_field_tag(:return_to, return_path) if return_path
+        html += f.submit('Follow', :class => "btn btn-primary mar-top-5")
+        html.html_safe
       end
     end
   end

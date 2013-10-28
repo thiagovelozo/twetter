@@ -21,8 +21,8 @@ class TweetsController < ApplicationController
 
   def get_tweets
     if params[:username]
-      user = User.where(:username => params[:username]).first
-      @tweets = user.tweets.order('created_at DESC') if user
+      @user = User.where(:username => params[:username]).first
+      @tweets = @user.tweets.order('created_at DESC') if @user
     else
       @tweets = current_user.all_tweets
     end
