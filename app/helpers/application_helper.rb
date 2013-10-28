@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 module ApplicationHelper
   def follow_link(user)
     follow = Follow.where(:user => current_user, :following => user)
@@ -9,6 +11,11 @@ module ApplicationHelper
         f.submit('Follow', :class => "btn btn-primary mar-top-5")
       end
     end
+  end
+
+  # http://en.gravatar.com/site/implement/images/ruby/
+  def gravatar(user)
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.downcase)}?s=48"
   end
 
   def nav_item(name, path)
