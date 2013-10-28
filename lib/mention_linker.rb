@@ -5,12 +5,10 @@ class MentionLinker
 
   def call(env)
     status, headers, response = @app.call(env)
-    if headers["Content-Type"] and headers["Content-Type"].match(Regexp.new("text/html"))
-      if response.respond_to?(:first)
-        [status, headers, [link_mentions(response.first)]]
-      else
-        [status, headers, response]
-      end
+    if headers["Content-Type"] and
+       headers["Content-Type"].match(Regexp.new("text/html")) and
+       response.respond_to?(:first)
+      [status, headers, [link_mentions(response.first)]]
     else
       [status, headers, response]
     end
