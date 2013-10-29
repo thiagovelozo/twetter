@@ -10,7 +10,7 @@ module TweetsHelper
   end
 
   def has_retweeted(tweet)
-    current_user.retweets.where(:tweet_id => tweet.id).exists?
+    retweet(tweet).present? ? true : false
   end
 
   def retweet(tweet)
