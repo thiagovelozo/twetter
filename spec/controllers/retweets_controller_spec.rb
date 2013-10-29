@@ -78,11 +78,20 @@ describe RetweetsController do
     end
 
     describe "DELETE destroy" do
-      context "when passed a valid retweet id" do
+      context "when passed a valid retweet id (exists / belongs to current user)" do
+        let(:retweet) { FactoryGirl.create(:retweet, :user => user) }
+
         it "should delete the retweet" do
           delete :destroy, :id => retweet.id
 
           Retweet.where(:id => retweet.id).exists?.should == nil
+        end
+      end
+
+      context "when passed a retweet id which does not belong to the current user" do
+        it "should set an error notice" do
+          delete :destroy, :id => retweet.id
+          flash[:error].should == "We're sorry. We could not find that retweet."
         end
       end
 
