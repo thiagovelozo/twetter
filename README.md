@@ -31,17 +31,45 @@ cd ./twitter-clone
 # Install the required gems
 bundle install
 
+# Generate a new config/initializers/secret_token.rb file.
+echo "TwitterClone::Application.config.secret_key_base = '`bundle exec rake secret`'" > config/initializers/secret_token.rb
+
 # Set up the database
 bundle exec rake db:create db:migrate db:test:prepare
+
+# Start the server
+bundle exec rails s
 ```
+
+Once you've performed the above actions, you can view the website at http://localhost:3000.
+Start by creating a user for yourself and then consider using the rake tasks below to seed
+additional test data.
 
 Seeds
 -------------
 
 ```sh
-rake seed:tweets            # Create 5 tweets for each user
-rake seed:users             # Create 20 users
+bundle exec rake seed:users             # Create 20 users
+bundle exec rake seed:tweets            # Create 5 tweets for each user
 ```
+
+If you'd like to log in as one of your recently seeded users, use the rails console to
+set the user's password.
+
+```sh
+bundle exec rails c
+```
+
+```ruby
+user = User.find_by_username('<@username for the user>')
+user.password = 'temp1234'
+user.save
+user.email
+# => dmatthews@thinkful.com
+exit
+```
+
+Now you can use the email address displayed and password to log in as this user.
 
 Run the Tests
 -------------
