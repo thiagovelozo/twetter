@@ -15,7 +15,7 @@ class FollowsController < ApplicationController
   # This action first attempts to find an existing Follow instance between the current user and
   # the user whose id matches params[:follow][:following_id]. If one is not found, it is created.
   # If the Follow is created successfully, a success notice is set. Otherwise, an error notice
-  # is set. Either way we are directed back to the index action.
+  # is set. The #smart_return method is called to take us back to the appropriate page.
   #
   def create
     following = current_user.follows.where(:following_id => follow_params[:following_id]).first ||
@@ -33,8 +33,8 @@ class FollowsController < ApplicationController
   # Responsible for unfollowing a user. Works by deleting the Follow instance. The use of the
   # resource method (defined below) ensures that only follows which belong to the authenticated
   # user can be matched and deleted. If the Follow instance is found and deleted successfully,
-  # a success notice is set. Otherwise, an error notice is set. Either way we are directed back
-  # to the index action.
+  # a success notice is set. Otherwise, an error notice is set. The #smart_return method is
+  # called to take us back to the appropriate page.
   #
   def destroy
     if resource and resource.destroy
@@ -58,10 +58,17 @@ class FollowsController < ApplicationController
     params.require(:follow).permit(:following_id)
   end
 
+  # Finds a Follow instance that matches the id passed and assigns it to @resource
+  # unless @resource is already assigned. This ensures that we only look for the
+  # Follow instance until we find it the first time.
+  #
   def resource
     @resource ||= current_user.follows.where(:id => params[:id]).first
   end
 
+  # Leverages the params[:return_to] value to direct the user back to a requested
+  # page. If no value is present, the user is directed back to the index.
+  #
   def smart_return
     if params[:return_to].present?
       redirect_to params[:return_to]
