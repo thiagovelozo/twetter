@@ -11,8 +11,8 @@
         <tbody>
           <tr>
             <td>
-              <%= content_tag :h4, current_user.tweets.count %>
-              <%= content_tag :small, 'Tweets', :class => "uppercase lighter" %>
+              <%= content_tag :h4, current_user.twets.count %>
+              <%= content_tag :small, 'Twets', :class => "uppercase lighter" %>
             </td>
             <td>
               <%= content_tag :h4, current_user.follows.count %>
@@ -26,23 +26,23 @@
       </table>
     </li>
     <li>
-    <%= form_for (@tweet || :tweet), :url => tweets_path,
+    <%= form_for (@twet || :twet), :url => twets_path,
                          :builder => InlineErrorsBuilder,
                          :method => :POST,
                          :role => :form do |f| %>
       <div class="mar-top-15">
         <%= content_tag :div, :class => f.validation_class(:content, "form-group") do %>
-          <%= f.text_area :content, :placeholder => "Compose new Tweet...", :class => 'form-control' %>
+          <%= f.text_area :content, :placeholder => "Compose new Twet...", :class => 'form-control' %>
           <%= f.errors_for :content %>
         <% end %>
 
-        <%= f.submit "Tweet", :class => "btn btn-primary pull-right" %>
+        <%= f.submit "Twet", :class => "btn btn-primary pull-right" %>
       </div>
     <% end %>
   </ul>
 
   <ul class="nav nav-pills nav-stacked well">
     <%= nav_item("Follow", follows_path) %>
-    <%= nav_item("Tweet", tweets_path) %>
+    <%= nav_item("Twet", twets_path) %>
   </ul>
 </div>

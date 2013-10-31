@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131028181841) do
+ActiveRecord::Schema.define(version: 20131031152306) do
 
   create_table "follows", force: true do |t|
     t.integer  "user_id"
@@ -31,14 +31,14 @@ ActiveRecord::Schema.define(version: 20131028181841) do
 
   add_index "retweets", ["tweet_id", "user_id"], name: "index_retweets_on_tweet_id_and_user_id"
 
-  create_table "tweets", force: true do |t|
+  create_table "twets", force: true do |t|
     t.integer  "user_id"
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "tweets", ["user_id"], name: "index_tweets_on_user_id"
+  add_index "twets", ["user_id"], name: "index_tweets_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

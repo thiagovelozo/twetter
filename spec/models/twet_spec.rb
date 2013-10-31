@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe Tweet do
+describe Twet do
   context "associations" do
     it { should belong_to :user }
-    it { should have_many :retweets }
+    it { should have_many :retwets }
   end
 
   context "factories" do
-    describe "#tweet" do
-      subject { FactoryGirl.build(:tweet) }
+    describe "#twet" do
+      subject { FactoryGirl.build(:twet) }
 
       it { should be_valid }
     end
@@ -17,11 +17,11 @@ describe Tweet do
   context "validations" do
     it { should validate_presence_of :content }
     it "should not be valid when the length is between 2 and 140 characters" do
-      t1 = Tweet.new(:content => '1')
-      t2 = Tweet.new(:content => ':)')
-      t3 = Tweet.new(:content => 'fdsjklsjfksdk fd kslfsdjkd')
-      t4 = Tweet.new(:content => '*'*140)
-      t5 = Tweet.new(:content => '#'*141)
+      t1 = Twet.new(:content => '1')
+      t2 = Twet.new(:content => ':)')
+      t3 = Twet.new(:content => 'fdsjklsjfksdk fd kslfsdjkd')
+      t4 = Twet.new(:content => '*'*140)
+      t5 = Twet.new(:content => '#'*141)
 
       [t1, t5].each do |t|
         t.valid?
@@ -38,21 +38,21 @@ describe Tweet do
   end
 
   describe ".by_user_ids" do
-    let!(:t1) { FactoryGirl.create(:tweet) }
-    let!(:t2) { FactoryGirl.create(:tweet) }
-    let!(:t3) { FactoryGirl.create(:tweet) }
-    let!(:t4) { FactoryGirl.create(:tweet) }
-    let!(:t5) { FactoryGirl.create(:tweet) }
-    let!(:t6) { FactoryGirl.create(:tweet) }
+    let!(:t1) { FactoryGirl.create(:twet) }
+    let!(:t2) { FactoryGirl.create(:twet) }
+    let!(:t3) { FactoryGirl.create(:twet) }
+    let!(:t4) { FactoryGirl.create(:twet) }
+    let!(:t5) { FactoryGirl.create(:twet) }
+    let!(:t6) { FactoryGirl.create(:twet) }
 
     it "should search by user ids" do
       Tweet.by_user_ids(t1.user.id, t3.user.id).load.map(&:id).should == [t3.id, t1.id]
     end
 
-    it "should include retweets of the users" do
-      t4.retweets.create!(:user => t3.user)
-      t5.retweets.create!(:user => t4.user)
-      t6.retweets.create!(:user => t2.user)
+    it "should include retwets of the users" do
+      t4.retwets.create!(:user => t3.user)
+      t5.retwets.create!(:user => t4.user)
+      t6.retwets.create!(:user => t2.user)
 
       Tweet.by_user_ids(t1.user.id, t3.user.id).load.map(&:id).should == [t4.id, t3.id, t1.id]
     end

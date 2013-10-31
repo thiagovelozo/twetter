@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe TweetsController do
+describe TwetsController do
   context "when no user is logged in" do
     describe "GET index" do
       subject { response }
@@ -12,7 +12,7 @@ describe TweetsController do
 
     describe "POST create" do
       subject { response }
-      before { post :create, :tweet => { :content => "Hello World!" } }
+      before { post :create, :twet => { :content => "Hello World!" } }
 
       it { should_not be_successful }
     end
@@ -30,28 +30,28 @@ describe TweetsController do
 
       it { should be_successful }
 
-      it "should assign @tweets" do
-        assigns[:tweets].should_not be_nil
+      it "should assign @twets" do
+        assigns[:twets].should_not be_nil
       end
     end
 
     describe "POST create" do
       let(:following) { FactoryGirl.create(:user) }
 
-      before { post :create, :tweet => { :content => "Hello World!" } }
+      before { post :create, :twet => { :content => "Hello World!" } }
 
       it "should redirect to GET index" do
-        response.should redirect_to tweets_path
+        response.should redirect_to twets_path
       end
 
       it "should display a success message" do
-        flash[:success].should == "Your tweet was shared"
+        flash[:success].should == "Your twet was shared"
       end
 
       it "should create a new record" do
         expect {
-          post :create, :tweet => { :content => "Hello World!" }
-        }.to change { Tweet.count }.by(1)
+          post :create, :twet => { :content => "Hello World!" }
+        }.to change { Twet.count }.by(1)
       end
     end
   end

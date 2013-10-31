@@ -1,4 +1,4 @@
-class Tweet < ActiveRecord::Base
+class Twet < ActiveRecord::Base
   belongs_to :user
 
   has_many :retweets
@@ -6,8 +6,8 @@ class Tweet < ActiveRecord::Base
   validates :content, :presence => true, :length => { :minimum => 2, :maximum => 140 }
   validates :user, :presence => true
 
-  # Gets all tweets made by or retweeted by the users referenced by the ids passed,
-  # starting with the most recent tweet made.
+  # Gets all twets made by the users referenced by the ids passed, starting with the
+  # most recent twet made.
   #
   def self.by_user_ids(*ids)
     [:flatten!, :compact!, :uniq!].each{ |meth| ids.send(meth) }
