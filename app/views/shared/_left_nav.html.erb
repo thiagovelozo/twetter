@@ -1,10 +1,17 @@
 <div class="col-md-4">
-  <ul class="nav nav-pills nav-stacked well text-left">
+  <ul class="nav nav-stacked well text-left">
     <li>
-      <%= content_tag :strong, current_user.name %>
-    </li>
-    <li>
-      <%= content_tag :small, '@'+current_user.username %>
+      <table class="table no-border">
+        <tbody>
+          <tr>
+            <%= content_tag :td, image_tag(gravatar(current_user), :class => 'img-rounded'), :style => 'width: 60px;' %>
+            <td>
+              <%= content_tag :strong, current_user.name %><br />
+              <%= content_tag :small, "@"+current_user.username, :class => 'text-muted' %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </li>
     <li>
       <table class="table table-bordered stats">
@@ -22,6 +29,7 @@
               <%= content_tag :h4, Follow.where(:following_id => current_user.id).count %>
               <%= content_tag :small, 'Followers', :class => "uppercase lighter" %>
             </td>
+          </tr>
         </tbody>
       </table>
     </li>

@@ -179,3 +179,11 @@ table.stats small {
 table.stats td:first-child {
   padding-left: 18px;
 }
+
+table.no-border td {
+  border-top: none !important;
+}
+
+li table {
+  margin-bottom: 0 !important;
+}
