@@ -10,7 +10,7 @@ describe MentionLinker do
         let(:txt) { 'I like @bluefocus' }
         let(:expected) { 'I like <a href="/bluefocus">@bluefocus</a>' }
 
-        it "should add a link to the user's tweets page" do
+        it "should add a link to the user's twets page" do
           linker.link_mentions(txt).should == expected
         end
       end

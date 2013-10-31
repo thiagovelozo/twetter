@@ -5,8 +5,8 @@
 #
 # NOTE: An easier way to accomplish this, would be to wrap all output of @username in a link
 # on the Rails side of things. If you take / took this approach, make sure to remember linking
-# @username mentions in Tweets as you display them. You can accomplish this by making the #link_mentions
-# method a view helper and running all Tweet#content displays through it.
+# @username mentions in Twets as you display them. You can accomplish this by making the #link_mentions
+# method a view helper and running all Twet#content displays through it.
 #
 class MentionLinker
 
