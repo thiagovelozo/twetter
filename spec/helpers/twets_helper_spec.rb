@@ -11,4 +11,39 @@ require 'spec_helper'
 #   end
 # end
 describe TwetsHelper do
+  let(:user) { FactoryGirl.create(:user) }
+
+  before do
+    helper.instance_eval <<-EOS
+      def current_user
+        User.find(#{user.id})
+      end
+    EOS
+  end
+
+  describe "#can_retwet" do
+    let(:twet) { FactoryGirl.create(:twet) }
+
+    context "when the twet belongs to the user" do
+      let(:twet) { FactoryGirl.create(:twet, :user => user) }
+
+      it "should return false" do
+        helper.can_retwet(twet).should == false
+      end
+    end
+
+    context "when the twet has been retweted by the user" do
+      before { user.retwets.create(:twet => twet) }
+
+      it "should return false" do
+        helper.can_retwet(twet).should == false
+      end
+    end
+
+    context "when the twet has not been retweted by nor owned by the user" do
+      it "should return true" do
+        helper.can_retwet(twet).should == true
+      end
+    end
+  end
 end

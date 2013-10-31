@@ -9,6 +9,30 @@
           <%= content_tag :small, twet.created_at.strftime("%b %-d"), :class => 'text-muted pull-right' %>
           <div class="clearfix"></div>
           <%= content_tag :p, twet.content %>
+          <div class="clearfix"></div>
+          <% if can_retwet(twet) -%>
+          <%= content_tag :div, :class => 'pull-right' do %>
+            <%= form_for :retwet, :url => retwets_path,
+                                   :method => 'POST',
+                                   :role => :form do |f| %>
+              <%= hidden_field_tag :return_to, request.original_url %>
+              <%= f.hidden_field :twet_id, :value => twet.id.to_s %>
+              <span class="glyphicon glyphicon-retweet smaller text-primary"></span>
+              <%= f.submit "Retwet".html_safe, :class => 'btn btn-link smaller' %>
+            <% end %>
+          <% end %>
+          <div class="clearfix"></div>
+          <% elsif has_retweted(twet) -%>
+          <%= content_tag :div, :class => 'pull-right' do %>
+            <%= form_for :retwet, :url => retwet_path(retwet(twet).id),
+                                   :method => 'DELETE',
+                                   :role => :form do |f| %>
+              <%= hidden_field_tag :return_to, request.original_url %>
+              <span class="glyphicon glyphicon-retweet smaller text-success"></span>
+              <%= f.submit 'Retweted', :class => 'btn btn-link text-success smaller' %>
+            <% end %>
+          <% end %>
+          <% end %>
         </td>
       </tr>
     </tbody>

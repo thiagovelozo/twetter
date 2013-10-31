@@ -149,6 +149,10 @@ nav {
   font-weight: lighter;
 }
 
+.smaller {
+  font-size: 70%;
+}
+
 .alert-float {
   position: fixed;
   top: 0;
@@ -186,4 +190,13 @@ table.no-border td {
 
 li table {
   margin-bottom: 0 !important;
+}
+
+.btn-link.text-success {
+  color: #468847;
+}
+
+.btn-link.smaller {
+  padding-right: 0;
+  padding-left: 0;
 }
