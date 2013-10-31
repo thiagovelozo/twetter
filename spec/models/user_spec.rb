@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
   context "associations" do
     it { should have_many :follows }
-    it { should have_many :tweets }
+    it { should have_many :twets }
   end
 
   context "factories" do
@@ -38,11 +38,11 @@ describe User do
     end
   end
 
-  describe "#all_tweets" do
+  describe "#all_twets" do
     let!(:user) { FactoryGirl.create(:user) }
-    let(:t1) { FactoryGirl.create(:tweet, :user => user)}
-    let(:t2) { FactoryGirl.create(:tweet) }
-    let(:t3) { FactoryGirl.create(:tweet) }
+    let(:t1) { FactoryGirl.create(:twet, :user => user)}
+    let(:t2) { FactoryGirl.create(:twet) }
+    let(:t3) { FactoryGirl.create(:twet) }
 
     before do
       t1
@@ -50,8 +50,8 @@ describe User do
       t3
     end
 
-    it "should return all my tweets and followed tweets, ordered by creation time" do
-      user.all_tweets.load.map(&:id).should == [t2.id, t1.id]
+    it "should return all my twets and followed twets, ordered by creation time" do
+      user.all_twets.load.map(&:id).should == [t2.id, t1.id]
     end
   end
 end
