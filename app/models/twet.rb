@@ -1,7 +1,7 @@
 class Twet < ActiveRecord::Base
   belongs_to :user
 
-  has_many :retweets
+  has_many :retwets
 
   validates :content, :presence => true, :length => { :minimum => 2, :maximum => 140 }
   validates :user, :presence => true
@@ -15,7 +15,7 @@ class Twet < ActiveRecord::Base
       arel_table[:user_id]
       .in(ids)
       .or(arel_table[:id].in(
-        Retweet.where(:user_id => ids).map(&:tweet_id)
+        Retwet.where(:user_id => ids).map(&:twet_id)
       ))
     ).order('created_at DESC')
   end

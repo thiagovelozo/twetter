@@ -46,7 +46,7 @@ describe Twet do
     let!(:t6) { FactoryGirl.create(:twet) }
 
     it "should search by user ids" do
-      Tweet.by_user_ids(t1.user.id, t3.user.id).load.map(&:id).should == [t3.id, t1.id]
+      Twet.by_user_ids(t1.user.id, t3.user.id).load.map(&:id).should == [t3.id, t1.id]
     end
 
     it "should include retwets of the users" do
@@ -54,7 +54,7 @@ describe Twet do
       t5.retwets.create!(:user => t4.user)
       t6.retwets.create!(:user => t2.user)
 
-      Tweet.by_user_ids(t1.user.id, t3.user.id).load.map(&:id).should == [t4.id, t3.id, t1.id]
+      Twet.by_user_ids(t1.user.id, t3.user.id).load.map(&:id).should == [t4.id, t3.id, t1.id]
     end
   end
 end
