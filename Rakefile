@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-TwitterClone::Application.load_tasks
+Twetter::Application.load_tasks

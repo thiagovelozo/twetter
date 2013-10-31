@@ -1,7 +1,7 @@
-twitter-clone
+Twetter
 =============
 
-This is the sample Twitter Clone code base for Thinkful's Ruby on Rails course.
+This is the sample version of Twetter, a basic clone of the most popular micro-blogging site, produced for Thinkful's Ruby on Rails course.
 
 Before Beginning
 -------------
@@ -24,15 +24,15 @@ Getting Started
 
 ```sh
 # Clone the repository
-git clone git@github.com:bluefocus/twitter-clone.git
+git clone git@github.com:Thinkful/twetter.git
 
-cd ./twitter-clone
+cd ./twetter
 
 # Install the required gems
 bundle install
 
 # Generate a new config/initializers/secret_token.rb file.
-echo "TwitterClone::Application.config.secret_key_base = '`bundle exec rake secret`'" > config/initializers/secret_token.rb
+echo "Twetter::Application.config.secret_key_base = '`bundle exec rake secret`'" > config/initializers/secret_token.rb
 
 # Set up the database
 bundle exec rake db:create db:migrate db:test:prepare
@@ -50,7 +50,7 @@ Seeds
 
 ```sh
 bundle exec rake seed:users             # Create 20 users
-bundle exec rake seed:tweets            # Create 5 tweets for each user
+bundle exec rake seed:twets             # Create 5 twets for each user
 ```
 
 If you'd like to log in as one of your recently seeded users, use the rails console to
@@ -77,3 +77,12 @@ Run the Tests
 ```sh
 bundle exec rspec
 ```
+
+Authors
+-------
+
+**Dan Matthews**
+
+- http://github.com/bluefocus
+- http://bluefoc.us
+- http://danmatthe.ws

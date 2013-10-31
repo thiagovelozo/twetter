@@ -1,11 +1,11 @@
-TwitterClone::Application.routes.draw do
+Twetter::Application.routes.draw do
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   authenticated :user do
     resources :follows, :except => [:new, :edit, :show, :update]
-    resources :tweets, :except => [:new, :edit, :show, :update]
+    resources :twets, :except => [:new, :edit, :show, :update]
     root :to => 'follows#index', :as => :user_root
   end
 

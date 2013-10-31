@@ -55,8 +55,8 @@ module ApplicationHelper
     case name
     when "Follow" then
       controller_name == 'follows' ? 'active' : ''
-    when "Tweet" then
-      controller_name == 'tweets' ? 'active' : ''
+    when "Twet" then
+      controller_name == 'twets' ? 'active' : ''
     end
   end
 
