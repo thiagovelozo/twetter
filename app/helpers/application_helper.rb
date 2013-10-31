@@ -22,8 +22,8 @@ module ApplicationHelper
   end
 
   # http://en.gravatar.com/site/implement/images/ruby/
-  def gravatar(user)
-    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.downcase)}?s=48"
+  def gravatar(user, opts = { :size => 48 })
+    "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email.downcase)}?s=#{opts[:size]}"
   end
 
   # Generates a left navigation link setting the class according to the result of a
