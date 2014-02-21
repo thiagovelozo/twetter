@@ -25,5 +25,6 @@ module Twetter
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       "#{html_tag}".html_safe
     }
+    config.secret_key_base = ENV["SECRET_KEY_BASE"]
   end
 end
