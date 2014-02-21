@@ -1,0 +1,10 @@
+<h1><%= content_tag :strong, @user.name %></h1>
+<h2><%= content_tag :small, '@'+@user.username %></h2>
+
+<div id="tweetbox">
+    <ul>
+        <% @user.twets.each do |twet| %>
+            <li><%= twet.content %></li>
+        <% end %>
+    </ul>
+<div>
