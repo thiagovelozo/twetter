@@ -17,6 +17,7 @@ Twetter::Application.routes.draw do
     get "users/:id", :to => "users#show", :as => :user_show
     get "/:username", to: "users#show"
   end
+  
   # You can have the root of your site routed with "root"
   root :to => 'home#index'
 
