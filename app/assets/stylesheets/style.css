@@ -28,7 +28,7 @@ body {
 nav {
   background-image: url(../assets/twitter_web_sprite_bgs.png);
   background-repeat: repeat-x;
-  min-height: 40px !important;
+  min-height: 30px !important;
 }
 
 .nav-logo-link {
@@ -38,7 +38,7 @@ nav {
 
 .nav-sign-out {
   float: right;
-  margin-top: -10px;
+  margin-top: -3px;
 }
 
 .bird-topbar-blue {

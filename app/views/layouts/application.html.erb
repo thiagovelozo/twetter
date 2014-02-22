@@ -11,12 +11,12 @@
 <div class="page-container">
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-      <a class="nav-logo-link" href="/">
-        <span class="icon bird-topbar-blue"></span>
-      </a>
 
-      <%= button_to("Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-xs btn-link nav-sign-out') if user_signed_in? %>
-    </div>
+      <%= link_to "Twetter", root_path, class: "navbar-brand" %>
+      <div class="nav navbar-nav navbar-right">
+      <li><%= link_to("Sign out", destroy_user_session_path, :method => :delete, :class => 'btn btn-xs btn-link nav-sign-out') if user_signed_in? %></li>
+      </div>
+  </div>
   </nav>
 
   <%= notices %>
