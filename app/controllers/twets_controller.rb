@@ -6,10 +6,12 @@ class TwetsController < ApplicationController
   #
   # This action uses the #get_twets method to set the @twets instance variable.
   #
-  #   @twets # => All twets defaultly shown to the authenticated user.
+  # @twets # => All twets defaultly shown to the authenticated user.
   #
   def index
+    puts "are you here?"
     get_twets
+    puts "yes I am"
   end
 
   # POST /twets
@@ -20,16 +22,17 @@ class TwetsController < ApplicationController
   # the twets visible to the authenticated user are loaded into @twets and the index
   # view template is displayed.
   #
-  #   @twet # => The newly created (or attempted) twet.
-  #   @twets # => (only set if the twet was not created) All twets defaultly shown
-  #                to the authenticated user.
+  # @twet # => The newly created (or attempted) twet.
+  # @twets # => (only set if the twet was not created) All twets defaultly shown
+  # to the authenticated user.
   #
   #
   def create
     @twet = current_user.twets.create(twet_params)
     if @twet.valid?
       flash[:success] = "Your twet was shared"
-      redirect_to :action => :index and return
+      puts "You succeeded!"
+      redirect_to follows_path
     else
       get_twets
       flash[:error] = "Your twet could not be saved"
